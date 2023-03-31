@@ -9,7 +9,7 @@ export class HttpServiceService  {
 
   constructor(private http:HttpClient) { }
 
-  baseUrl:string=environment.baseUrl ;
+  baseUrl:string = environment.baseUrl ;
 
   httpHeaders:HttpHeaders = new HttpHeaders()
                             .set("Content-type","application/json"); 
@@ -21,8 +21,15 @@ export class HttpServiceService  {
     const url = this.baseUrl + endPoint ;
     return this.http.get(url,{headers:this.httpHeaders});
    }
+ 
    getDataFromServerByQueryParams(endPoint:string,httpParams:HttpParams){
+  const url = this.baseUrl + endPoint;
+  return this.http.get(url,{headers:this.httpHeaders,params:httpParams})
+   }
+
+   
+   postDataToServer(endPoint:string,data:any){
     const url = this.baseUrl + endPoint ;
-    return this.http.get(url,{headers:this.httpHeaders,params:httpParams});
+    return this.http.post(url,data,{headers:this.httpHeaders});
    }
 }
